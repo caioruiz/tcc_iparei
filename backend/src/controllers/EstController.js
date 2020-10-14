@@ -1,0 +1,55 @@
+const axios = require('axios');
+const Est = require('../models/Estabelecimento');
+//const { index } = require('../models/utils/PointSchema');
+//const { response } = require('express');
+const parseStringArray = require('../utils/parseStringArray');
+
+module.exports = {
+
+     async index(req, res) {
+         const estas = await Est.find();
+
+         return res.json(estas);
+     },
+
+
+    async store(req, res) {
+        
+        const { nome, endereco, email, cnpj, foto, obs, latitude, longitude } = req.body;
+        
+        let esta = await Est.findOne({ cnpj });
+
+        if(!esta)
+        {
+            //const apiRes = await axios.get(`https://api.github.com/users/${nome}`);
+    
+            console.log(req.body);
+            //console.log(apiRes.data);
+        
+            //const { name = login, bio } = apiRes
+            // pegar a latitude e longitude pelo cep
+            //https://maps.googleapis.com/maps/api/geocode/json?address=06616110&key=AIzaSyBI3uZPiC7LwFQ-Rx0xqidkwI1CV6MsvfI
+        
+            const obsArray = parseStringArray(obs);
+            
+            const location = {
+                type: 'Point',
+                coordinates: [longitude, latitude],
+            };
+        
+            esta = await Est.create({
+                nome, 
+                endereco,
+                email,
+                cnpj,
+                foto,
+                obs: obsArray,
+                location,
+            });
+        }
+
+        
+    
+        return res.json(esta);
+    }
+};
