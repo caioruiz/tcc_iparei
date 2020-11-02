@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from  './Login/index';
 import CadastroEstabelecimento from  './CadastroEstabelecimento/index';
 import Cadastro from  './Cadastro/index';
+import HomePage from  './HomePage/index';
 //import Dashboard from  './pages/Dashboard';
 //import CardapioCadastro from  './pages/CardapioCadastro';
 //import NewCardapio from  './pages/NewCardapio';
@@ -12,7 +13,8 @@ export default function Routes(){
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={Login}/>
+                <Route path="/" exact component={HomePage}/>
+                <Route path="/Login" component={Login}/>
                 <Route path="/CadastroEstabelecimento" component={CadastroEstabelecimento}/>
                 <Route path="/Cadastro" component={Cadastro}/>
                 {/* <Route path="/cardapio" component={Dashboard}/>

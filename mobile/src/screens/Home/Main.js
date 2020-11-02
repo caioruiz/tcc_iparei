@@ -5,6 +5,7 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { MaterialIcons } from '@expo/vector-icons';
 
 import api from '../services/api';
+import { connect, disconnect, subscribeToNewEsta } from '../services/socket';
 
 function Main({ navigation }) {
     const [estabelecimentos, setEstabelecimentos] = useState([]);
@@ -34,7 +35,26 @@ function Main({ navigation }) {
         }
 
         loadInitialPosition();
+        
     }, []);
+
+    useEffect(() => {
+        subscribeToNewEsta(esta => setEstabelecimentos([...estabelecimentos, esta]));
+        
+    }, 
+    [estabelecimentos])
+
+    function setupWebsocket() {
+        disconnect();
+
+        const { latitude, longitude } = currentRegion;
+
+        connect(
+            latitude, 
+            longitude,
+            endereco,
+        );
+    };
 
     async function loadEstabelecimentos() {
         const {latitude, longitude} = currentRegion;
@@ -48,11 +68,14 @@ function Main({ navigation }) {
         });
         //console.log(response.data.estas);
         setEstabelecimentos(response.data.estas);
+        setupWebsocket();
     }
 
+    
     function handleRegionChange(region){
         console.log(region);
         setCurrentRegion(region);
+        loadEstabelecimentos();
     }
 
     if(!currentRegion){
@@ -95,6 +118,9 @@ function Main({ navigation }) {
                 autoCorrect={false}
                 value={endereco}
                 onChangeText={text => setEndereco(text)}
+                onSubmitEditing={Keyboard.dismiss}
+                onKeyPress={loadEstabelecimentos}
+              
             />
             
             <TouchableOpacity onPress={loadEstabelecimentos} style={styles.loadButton} >

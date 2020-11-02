@@ -3,6 +3,7 @@ const Est = require('../models/Estabelecimento');
 //const { index } = require('../models/utils/PointSchema');
 //const { response } = require('express');
 const parseStringArray = require('../utils/parseStringArray');
+const { findConnections, sendMessage } = require('../websocket');
 
 module.exports = {
 
@@ -46,6 +47,16 @@ module.exports = {
                 obs: obsArray,
                 location,
             });
+
+
+            // filtrar conexões que estão dentro do campo de distancia do usuario.
+
+            const sendSocketMessageTo = findConnections(
+                { latitude, longitude },
+                endereco,
+            )
+
+            sendMessage(sendSocketMessageTo, 'new-esta', esta);
         }
 
         

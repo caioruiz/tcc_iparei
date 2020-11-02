@@ -28,6 +28,8 @@ module.exports = {
                 obs,
                 location,
             });
+            
+
         }
         
         return res.json(estabelecimento);
