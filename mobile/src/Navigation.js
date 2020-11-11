@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
-import HomeScreen from './screens/Home/index'
+import Home from './screens/Home/index'
 import PayScreen from './screens/Pay/index'
 import HistoricoScreen from './screens/Historico/index'
 import AjusteScreen from './screens/Ajustes/index'
@@ -42,7 +42,7 @@ export default function Navigation(){
                     backgroundColor: '#fff',
                     borderTopColor: 'rgba(255, 255, 255, 0.2)',
                 },
-                activeTintColor: '#009900',
+                activeTintColor: '#DD3A06',
                 inactiveTintColor: '#4d4d4d'
 
 
@@ -50,7 +50,7 @@ export default function Navigation(){
         >
             <Tab.Screen 
                 name="Home" 
-                component={HomeScreen} 
+                component={Home} 
                 options={{
                     title: 'Inicio'
                 }}

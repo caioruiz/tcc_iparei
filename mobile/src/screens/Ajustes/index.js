@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-navigation';
 export default function Ajustes() {
     return (
         
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#DD3A06"}}>
             <ScrollView>
 
             <View style={styles.viewImage}>
@@ -57,7 +57,7 @@ export default function Ajustes() {
                 
             </View>
 
-            <View style={{ backgroundColor: '#bfbfbf', height: 20 }} />
+            <View style={{ backgroundColor: '#DD3A06', height: 20 }} />
 
             <View style={{ backgroundColor: '#FFF' }} >
                 <View style={ styles.viewPadrao }>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         //justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'center',
-        backgroundColor: '#bfbfbf',
+        backgroundColor: '#DD3A06',
     },
 
     image: {
@@ -101,14 +101,14 @@ const styles = StyleSheet.create({
 
     viewTitulo: {
         height: 30,
-        backgroundColor: '#bfbfbf',
+        backgroundColor: '#DD3A06',
         borderBottomWidth: 1,
-        borderColor: '#bfbfbf'
+        borderColor: '#DD3A06'
     }, 
     
     textTitulo: {
         fontSize: 15,
-        color: '#009900',
+        color: '#FFF',
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         height: 50,
         //backgroundColor: '#009900',
         borderBottomWidth: 1,
-        borderColor: '#bfbfbf'
+        borderColor: '#DD3A06'
     }, 
 
     textPadrao: {
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
 
     textSair: {
         fontSize: 15,
-        color: '#ff0000',
+        color: '#DD3A06',
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
