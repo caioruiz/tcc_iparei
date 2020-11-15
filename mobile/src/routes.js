@@ -5,6 +5,7 @@ import Main from './screens/Home/Main';
 import Profile from './screens/Home/Profile';
 import Login from './Login';
 import index from './index'
+import Cadastrar from './cadastrar';
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -34,6 +35,7 @@ const Routes = createAppContainer(
             
         },
         Profile,
+        Cadastrar,
 
     }, {
         defaultNavigationOptions: {

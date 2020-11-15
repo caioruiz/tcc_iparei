@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import '../Estilo.css';
-import logo from '../../../assets/logo-iparei.png';
+import logo from '../../../images/logo2.png';
 
 function EstaForm({ onSubmit }){
     const [latitude, setLatitude] = useState('');
@@ -63,7 +63,7 @@ function EstaForm({ onSubmit }){
     <>
 
         <div className="contentCadastro">
-        <h2>Iparei</h2>
+        {/* <h2>Iparei</h2> */}
       <img className="imagelogo" src={logo} alt="Iparei"/>
       <form onSubmit={handleSubmit}>
 
@@ -139,6 +139,7 @@ function EstaForm({ onSubmit }){
             <input type="text" id="telefone" placeholder="Telefone para contato"    /> */}
 
             <button className="btn" type="submit">Salvar</button>
+            
             <button className="btn" type="submit"><a className="btnA" href="/">Cancelar</a></button>
         </form>
             

@@ -98,13 +98,13 @@ export default function Login({ navigation }) {
           ]  
         }]}>
             <TextInput style={styles.input}  placeholder="Email" autoCorrect={false} onChangeText={() => {}} />
-            <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} onChangeText={() => {}} />
+            <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" autoCorrect={false} onChangeText={() => {}} />
 
             <TouchableOpacity style={styles.btnSubmit} onPress={ handleSubmit } >
                 <Text style={styles.SubmitText}>Acessar</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.btnCriarConta} onPress={() => navigation.navigate('cadastrar')}  >
+            <TouchableOpacity style={styles.btnCriarConta} onPress={() => navigation.navigate('Cadastrar')}  >
                 <Text style={styles.criarContaText}>Criar conta</Text>
             </TouchableOpacity>
 

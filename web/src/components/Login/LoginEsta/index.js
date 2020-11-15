@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import api from '../../../services/api';
 
-import logo from '../../../assets/logo-iparei.png';
+import logo from '../../../images/logo2.png';
 
 import '../Estilo.css';
 
@@ -45,7 +45,7 @@ async function handleSubmit(e) {
         <>
 
         <div className="container">
-        <h2>IParei</h2>
+        {/* <h2>IParei</h2> */}
         <img className="imageLogo" src={logo} alt="IParei"/>
 
       <div className="content">

@@ -5,6 +5,7 @@ import Login from  './Login/index';
 import CadastroEstabelecimento from  './CadastroEstabelecimento/index';
 import Cadastro from  './Cadastro/index';
 import HomePage from  './HomePage/index';
+import Sobre from './Sobre/index';
 //import Dashboard from  './pages/Dashboard';
 //import CardapioCadastro from  './pages/CardapioCadastro';
 //import NewCardapio from  './pages/NewCardapio';
@@ -17,6 +18,7 @@ export default function Routes(){
                 <Route path="/Login" component={Login}/>
                 <Route path="/CadastroEstabelecimento" component={CadastroEstabelecimento}/>
                 <Route path="/Cadastro" component={Cadastro}/>
+                <Route path="/Sobre" component={Sobre}/>
                 {/* <Route path="/cardapio" component={Dashboard}/>
                 <Route path="/cadastroCardapio" component={CardapioCadastro}/>
                 <Route path="/newCardapio" component={NewCardapio}/> */}
