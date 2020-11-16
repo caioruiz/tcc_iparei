@@ -8,6 +8,10 @@ function subscribeToNewEsta(subscribeFunction){
     socket.on('new-esta', subscribeFunction);
 }
 
+function subscribeToNewHist(subscribeFunction){
+    socket.on('new-hist', subscribeFunction);
+}
+
 function connect(latitude, longitude, endereco){
     socket.io.opts.query = {
         latitude, longitude, endereco

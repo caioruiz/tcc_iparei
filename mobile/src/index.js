@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar, SafeAreaView, YellowBox } from 'react-native';
+import { StatusBar, SafeAreaView, YellowBox, AsyncStorage } from 'react-native';
 
 YellowBox.ignoreWarnings([
   'Unrecognize WebSocket',
-  'YellowBox has been'
+  'YellowBox has been',
+  'Deprecation in',
+  'Require cycle'
 ]);
 
 import Navigation from './Navigation';

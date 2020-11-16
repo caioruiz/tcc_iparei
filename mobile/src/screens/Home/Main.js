@@ -66,7 +66,7 @@ function Main({ navigation }) {
                 endereco,
             }
         });
-        //console.log(response.data.estas);
+        console.log(response.data.estas);
         setEstabelecimentos(response.data.estas);
         setupWebsocket();
     }

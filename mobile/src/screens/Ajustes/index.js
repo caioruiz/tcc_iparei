@@ -1,18 +1,50 @@
-import React from 'react';
-import { Text, Image, View, StyleSheet, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Text, Image, View, StyleSheet, ScrollView, AsyncStorage} from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
-
+import api from '../services/api';
 
 export default function Ajustes() {
+    const [_id, setIdUser] = useState('');
+    const [ajusteUser, setAjusteUser] = useState('');
+
+    useEffect(() => {
+        AsyncStorage.getItem('user').then(user => {
+            setIdUser(user);
+
+
+        })
+        
+        
+        loadAjuste()
+    }, []);
+
+    async function loadAjuste() {
+
+    
+
+        const response = await api.get('/buscarUser', {
+            params: {
+                _id,
+            }
+        });
+        
+        console.log('ID: ' + _id);
+        console.log(response.data);
+        setAjusteUser(response.data.usuario[0]);
+        console.log(ajusteUser.nome)
+
+        //setupWebsocket();
+    }
+
     return (
         
         <SafeAreaView style={{ flex: 1, backgroundColor: "#DD3A06"}}>
             <ScrollView>
 
             <View style={styles.viewImage}>
-                <Image source={{ uri: 'https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg' }} style={styles.image} />
-                <Text style={styles.textImage}>Caio Ruiz</Text>
+                <Image source={{ uri: ajusteUser.foto }} style={styles.image} />
+                <Text style={styles.textImage}>{ajusteUser.nome}</Text>
             </View>
 
             <View style={{ backgroundColor: '#FFF' }} >
@@ -21,19 +53,19 @@ export default function Ajustes() {
                 </View>
 
                 <View style={ styles.viewPadrao}>
-                    <Text style={ styles.textPadrao }>Nome: Caio Ruiz</Text>
+                    <Text style={ styles.textPadrao }>Nome: {ajusteUser.nome}</Text>
                 </View>
                 
                 <View style={ styles.viewPadrao}>
-                    <Text style={ styles.textPadrao }>CPF: 410.860.168-82</Text>
+                    <Text style={ styles.textPadrao }>CPF: {ajusteUser.CPF}</Text>
                 </View>
 
                 <View style={ styles.viewPadrao}>
-                    <Text style={ styles.textPadrao }>Telefone: (11) 97721-0000)</Text>
+                    <Text style={ styles.textPadrao }>Telefone: {ajusteUser.telefone}</Text>
                 </View>
 
                 <View style={ styles.viewPadrao}>
-                    <Text style={ styles.textPadrao }>E-mail: caioruiz23@gmail.com</Text>
+                    <Text style={ styles.textPadrao }>E-mail: {ajusteUser.email}</Text>
                 </View>
             </View>
 

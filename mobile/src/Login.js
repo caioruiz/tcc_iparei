@@ -4,7 +4,7 @@ import { View, KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Text, S
 import { StackActions, NavigationActions, StackNavigator, createNavigator, Navigation } from 'react-navigation';
 import { useNavigation } from '@react-navigation/native'
 
-
+import api from './screens/services/api';
 import chamaNavigation from './chamaNavigation'
 
 export default function Login({ navigation }) {
@@ -12,8 +12,16 @@ export default function Login({ navigation }) {
     const [offset] = useState(new Animated.ValueXY({ x: 0, y: 95 }));
     const [opacity] = useState(new Animated.Value(0));
     const [logo] = useState(new Animated.ValueXY({ x: 350, y: 230 }));
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-   
+   useEffect(() => {
+        AsyncStorage.getItem('user').then(user => {
+            if(user){
+                navigation.navigate('index');
+            }
+        })
+   }, []);
 
     useEffect(() => {
         KeyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
@@ -71,17 +79,21 @@ export default function Login({ navigation }) {
     
     async function handleSubmit(){
         // email e senha.
-        // console.log(email);
-        // console.log(senha);
-        // const response = await api.post('/restaurante', {
-        //      email,
-        //      password
-        //  });
-        // const { _id } = response.data;
+        console.log(email);
+        //console.log(password);
+        const response = await api.get('/loginUsuario', {
+            params: {
+                email,
+                //password,
+            }
+        });
+        const {_id} = response.data[0];
+        const retorno = response.data;
+        const retorno2 = retorno;
+        console.log(_id);
+       //console.log(retorno2[0]._id);
 
-        // console.log(_id);
-
-        // await AsyncStorage.setItem('user', _id);
+        await AsyncStorage.setItem('user', _id);
         navigation.navigate('index');
     }
 
@@ -97,8 +109,8 @@ export default function Login({ navigation }) {
               { translateY: offset.y}
           ]  
         }]}>
-            <TextInput style={styles.input}  placeholder="Email" autoCorrect={false} onChangeText={() => {}} />
-            <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" autoCorrect={false} onChangeText={() => {}} />
+            <TextInput style={styles.input}  placeholder="Email" autoCorrect={false} value={email} onChangeText={setEmail} />
+            <TextInput style={styles.input} secureTextEntry={true} placeholder="Senha" autoCorrect={false} value={password} onChangeText={setPassword} />
 
             <TouchableOpacity style={styles.btnSubmit} onPress={ handleSubmit } >
                 <Text style={styles.SubmitText}>Acessar</Text>

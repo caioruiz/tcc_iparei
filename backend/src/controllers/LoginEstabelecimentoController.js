@@ -6,15 +6,16 @@ module.exports = {
         // busca estabelecimentos num raio de 20km.
         console.log(req.query);
 
-        const { email, password } = req.query;
+        //const { email, password } = req.query;
+        const { email } = req.query;
 
         const estas = await Est.find({
             email: {
                 $in: email,
             },
-            password: {
-                $in: password,
-            },
+            // password: {
+            //     $in: password,
+            // },
         });
 
         return res.json({ estas });

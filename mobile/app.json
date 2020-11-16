@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "mobile",
+    "name": "IPAREI",
     "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#DD3A06"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,10 +17,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.iparei.ipareiapp",
+      "buildNumber": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.iparei.ipareiapp",
+      "versionCode": 1
     }
   }
 }

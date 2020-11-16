@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Est = require('../models/Estabelecimento');
+const User = require('../models/Usuario');
 //const { index } = require('../models/utils/PointSchema');
 //const { response } = require('express');
 const parseStringArray = require('../utils/parseStringArray');
@@ -7,18 +7,12 @@ const { findConnections, sendMessage } = require('../websocket');
 
 module.exports = {
 
-     async index(req, res) {
-         const estas = await Est.find();
-
-         return res.json(estas);
-     },
-
-     async indexLogin(req, res){
+     async index(req, res){
         console.log(req.query);
 
         const { email } = req.query;
 
-        const estas = await User.find({
+        const usuario = await User.find({
             email: {
                 $in: email,
             },
@@ -27,17 +21,34 @@ module.exports = {
             // },
         });
 
-        return res.json(estas);
+        return res.json(usuario);
     },
 
+    async indexBuscarUser(req, res){
+        console.log(req.query);
 
+        const { _id } = req.query;
+
+        const usuario = await User.find({
+            _id: {
+                $in: _id,
+            },
+            // password: {
+            //     $in: password,
+            // },
+        });
+
+        return res.json({usuario});
+    }, 
+
+     
     async store(req, res) {
         
-        const { nome, endereco, email, cnpj, foto, obs, latitude, longitude } = req.body;
+        const { nome, CPF, telefone, email, password, foto } = req.body;
         
-        let esta = await Est.findOne({ cnpj });
+        let usuario = await User.findOne({ CPF });
 
-        if(!esta)
+        if(!usuario)
         {
             //const apiRes = await axios.get(`https://api.github.com/users/${nome}`);
     
@@ -48,36 +59,34 @@ module.exports = {
             // pegar a latitude e longitude pelo cep
             //https://maps.googleapis.com/maps/api/geocode/json?address=06616110&key=AIzaSyBI3uZPiC7LwFQ-Rx0xqidkwI1CV6MsvfI
         
-            const obsArray = parseStringArray(obs);
+            //const obsArray = parseStringArray(obs);
             
-            const location = {
-                type: 'Point',
-                coordinates: [longitude, latitude],
-            };
+            // const location = {
+            //     type: 'Point',
+            //     coordinates: [longitude, latitude],
+            // };
         
-            esta = await Est.create({
+            usuario = await User.create({
                 nome, 
-                endereco,
+                CPF,
+                telefone,
                 email,
-                cnpj,
+                password,
                 foto,
-                obs: obsArray,
-                location,
             });
 
 
             // filtrar conexões que estão dentro do campo de distancia do usuario.
 
             const sendSocketMessageTo = findConnections(
-                { latitude, longitude },
-                endereco,
+                nome,
             )
 
-            sendMessage(sendSocketMessageTo, 'new-esta', esta);
+            sendMessage(sendSocketMessageTo, 'new-usuario', usuario);
         }
 
         
     
-        return res.json(esta);
+        return res.json(usuario);
     }
 };
